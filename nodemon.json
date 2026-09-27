@@ -1,0 +1,3 @@
+{
+  "ignore": [".models/*", "node_modules/*", "frontend/*"]
+}

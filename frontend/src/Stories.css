@@ -1,0 +1,235 @@
+.stories-page {
+  min-height: 100vh;
+  padding: 60px 7%;
+  background: #f8f9ff;
+}
+
+/* Header */
+
+.stories-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.stories-label {
+  color: #6157e8;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.stories-header h1 {
+  font-size: 48px;
+  font-weight: 900;
+  color: #252542;
+}
+
+.stories-header p {
+  margin-top: 10px;
+  color: #858597;
+  font-size: 17px;
+}
+
+/* Search */
+
+.story-search {
+  width: 280px;
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #eeeeF5;
+  border-radius: 12px;
+}
+
+.story-search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Categories */
+
+.category-tabs {
+  max-width: 1200px;
+  margin: 45px auto 30px;
+  display: flex;
+  gap: 12px;
+}
+
+.category-tabs button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  color: #77778c;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.category-tabs button.active {
+  background: #6157e8;
+  color: white;
+}
+
+/* Grid */
+
+.stories-grid {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* Card */
+
+.story-card {
+  display: flex;
+  gap: 22px;
+  padding: 20px;
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 10px 35px rgba(50, 50, 100, 0.07);
+  transition: 0.25s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 40px rgba(50, 50, 100, 0.12);
+}
+
+/* Story Image */
+
+.story-image {
+  min-width: 170px;
+  height: 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 75px;
+}
+
+.fox {
+  background: #fff0df;
+}
+
+.rabbit {
+  background: #f1efff;
+}
+
+.space {
+  background: #e9f3ff;
+}
+
+.ocean {
+  background: #e5f8ff;
+}
+
+/* Content */
+
+.story-content {
+  padding: 5px 0;
+}
+
+.difficulty {
+  display: inline-block;
+  padding: 5px 11px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.difficulty.easy {
+  background: #e9f9ee;
+  color: #3eaa65;
+}
+
+.difficulty.medium {
+  background: #fff2dc;
+  color: #d78a21;
+}
+
+.story-content h2 {
+  margin-top: 12px;
+  font-size: 22px;
+  font-weight: 900;
+  color: #252542;
+}
+
+.story-content p {
+  margin-top: 8px;
+  color: #858597;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.story-details {
+  display: flex;
+  gap: 15px;
+  margin-top: 14px;
+  color: #77778c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.story-btn {
+  margin-top: 17px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #252542;
+  color: white;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .stories-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .story-search {
+    width: 100%;
+  }
+
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stories-page {
+    padding: 40px 5%;
+  }
+
+  .stories-header h1 {
+    font-size: 36px;
+  }
+
+  .category-tabs {
+    overflow-x: auto;
+  }
+
+  .story-card {
+    flex-direction: column;
+  }
+
+  .story-image {
+    width: 100%;
+  }
+}

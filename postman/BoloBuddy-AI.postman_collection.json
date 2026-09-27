@@ -1,0 +1,152 @@
+{
+  "info": {
+    "name": "BoloBuddy AI Speaking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "storyId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Login (saves token)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "if (body.token) { pm.collectionVariables.set('token', body.token); console.log('Token saved'); }"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"you@example.com\",\n  \"password\": \"yourpassword\"\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "2. List stories (saves first storyId)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const body = pm.response.json();",
+              "if (body.stories && body.stories[0]) pm.collectionVariables.set('storyId', body.stories[0]._id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/stories?limit=5"
+      }
+    },
+    {
+      "name": "3. Analyze speaking (storyId)",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "audio",
+              "type": "file",
+              "src": [],
+              "description": "Choose a wav/mp3/m4a/webm/ogg/flac recording"
+            },
+            {
+              "key": "storyId",
+              "value": "{{storyId}}",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/ai/analyze-speaking"
+      }
+    },
+    {
+      "name": "4. Analyze speaking (storyText)",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "audio",
+              "type": "file",
+              "src": []
+            },
+            {
+              "key": "storyText",
+              "value": "The little fox felt very comfortable in his warm home.",
+              "type": "text"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/ai/analyze-speaking"
+      }
+    },
+    {
+      "name": "5. My analyses",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/ai/speaking-analyses?page=1&limit=10"
+      }
+    }
+  ]
+}
