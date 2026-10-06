@@ -49,7 +49,17 @@ async function loadPipeline() {
         };
 
         const create = (type) =>
-            pipeline("automatic-speech-recognition", model, { dtype: type, device: "cpu", progress_callback });
+    pipeline("automatic-speech-recognition", model, {
+        dtype: type,
+        device: "cpu",
+        progress_callback,
+        session_options: {
+            intraOpNumThreads: Number(process.env.WHISPER_THREADS) || 1,
+            interOpNumThreads: 1,
+            enableCpuMemArena: false,
+            enableMemPattern: false
+        }
+    });
 
         let transcriber;
         try {
